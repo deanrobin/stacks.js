@@ -45,6 +45,7 @@ beforeEach(() => {
   fetchMock.resetMocks();
 });
 
+//Plese look at this , Alex
 test('STX token transfer transaction serialization and deserialization', () => {
   const transactionVersion = TransactionVersion.Testnet;
   const chainId = DEFAULT_CHAIN_ID;
@@ -52,19 +53,19 @@ test('STX token transfer transaction serialization and deserialization', () => {
   const anchorMode = AnchorMode.Any;
   const postConditionMode = PostConditionMode.Deny;
 
-  const address = 'SP3FGQ8Z7JY9BWYZ5WM53E0M9NK7WHJF0691NZ159';
+  const address = 'STZG6BAY4JVR9RNAB1HY92B7Q208ZYY4HZG8ZXFM';
   const recipient = createStandardPrincipal(address);
   const recipientCV = standardPrincipalCV(address);
-  const amount = new BigNum(2500000);
-  const memo = 'memo (not included';
+  const amount = new BigNum(1000000);
+  const memo = 'abc';
 
   const payload = createTokenTransferPayload(recipientCV, amount, memo);
 
   const addressHashMode = AddressHashMode.SerializeP2PKH;
   const nonce = new BigNum(0);
   const fee = new BigNum(0);
-  const pubKey = '03ef788b3830c00abe8f64f62dc32fc863bc0b2cafeb073b6c8e1c7657d9c2c3ab';
-  const secretKey = 'edf9aee84d9b7abc145504dde6726c64f369d37ee34ded868fabd876c26570bc01';
+  const pubKey = '020f7d0377754e1865740fb42460ac55fcc8a4d6aac611b697f88cfc2091f318d8';
+  const secretKey = '33c4ad314d494632a36c27f9ac819e8d2986c0e26ad63052879f631a417c8adf';
   const spendingCondition = createSingleSigSpendingCondition(addressHashMode, pubKey, nonce, fee);
   const authType = AuthType.Standard;
   const authorization = new StandardAuthorization(spendingCondition);
@@ -90,6 +91,7 @@ test('STX token transfer transaction serialization and deserialization', () => {
   //   'ab21e489aca47af3288cdaebd358b0458a9159cadc314cecb7dd08043c0a6d';
 
   const serialized = transaction.serialize();
+  console.log(serialized.toString('hex'));
   const deserialized = deserializeTransaction(new BufferReader(serialized));
   expect(deserialized.version).toBe(transactionVersion);
   expect(deserialized.chainId).toBe(chainId);
