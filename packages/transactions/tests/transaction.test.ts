@@ -70,13 +70,13 @@ test('STX token transfer transaction serialization and deserialization', () => {
   const authType = AuthType.Standard;
   const authorization = new StandardAuthorization(spendingCondition);
 
-  const postCondition = createSTXPostCondition(
-    recipient,
-    FungibleConditionCode.GreaterEqual,
-    new BigNum(0)
-  );
-
-  const postConditions = createLPList([postCondition]);
+  // const postCondition = createSTXPostCondition(
+  //   recipient,
+  //   FungibleConditionCode.GreaterEqual,
+  //   new BigNum(0)
+  // );
+  //
+  const postConditions = createLPList([]);
   const transaction = new StacksTransaction(
     transactionVersion,
     authorization,
